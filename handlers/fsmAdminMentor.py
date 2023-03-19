@@ -64,16 +64,9 @@ async def load_group(message: types.Message, state: FSMContext):
             data['group'] = message.text
         await FSMAdmin.next()
 
-async def cancel_reg(message: types.Message, state: FSMContext):
-    current_state = await state.get_state()
-    if current_state:
-        await state.finish()
-        await message.answer("Отменено")
+
 
 def register_handlers_fsm_anketa(dp: Dispatcher):
-    dp.register_message_handler(cancel_reg, state='*', commands=['cancel'])
-    dp.register_message_handler(cancel_reg,
-                                Text(equals="cancel", ignore_case=True), state='*')
     dp .register_message_handler(fsm_start, commands=['reg'])
     dp.register_message_handler(load_id_mentor, state=FSMAdmin.id)
     dp.register_message_handler(load_name, state=FSMAdmin.name)
