@@ -44,4 +44,4 @@ def register_handlers_admin(dp: Dispatcher):
     dp.register_message_handler(ban, commands=['ban'], commands_prefix='!/')
     dp.register_message_handler(delete_data, commands=['del'])
     dp.register_callback_query_handler(complete_delete,
-                                       lambda call: call.data and call.data.startswith
+                                       lambda call: call.data and call.data.startswith("DELETE "))
