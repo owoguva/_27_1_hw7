@@ -83,4 +83,4 @@ def register_handlers_fsm_anketa(dp: Dispatcher):
     dp.register_message_handler(load_direction, state=FSMAdmin.direction)
     dp.register_message_handler(load_age, state=FSMAdmin.age)
     dp.register_message_handler(load_group, state=FSMAdmin.group)
-    dp.register_message_handler(submit, state=FSMAdmin.submit
+    dp.register_message_handler(submit, state=FSMAdmin.submit)
