@@ -56,8 +56,8 @@ async def get_anime(message: types.Message):
     animes = parser()
     for anime in animes:
         await message.answer(
-            f"#{anime['link']}\n"
-            f"#{anime['title']}\n"
+            f"{anime['link']}\n"
+            f"{anime['title']}\n"
             f"#y{anime['year']}\n"
             f"#{anime['genre']}\n"
             f"#{anime['country']}\n"
