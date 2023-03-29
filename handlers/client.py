@@ -2,6 +2,7 @@ from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot
 from database.bot_dp import sql_command_random
+from parser.anime import parser
 
 
 
@@ -51,9 +52,23 @@ async def get_random_user(message: types.Message):
                 f"{random_user[5]}"
     )
 
+async def get_anime(message: types.Message):
+    animes = parser()
+    for anime in animes:
+        await message.answer(
+            f"#{anime['link']}\n"
+            f"#{anime['title']}\n"
+            f"#y{anime['year']}\n"
+            f"#{anime['genre']}\n"
+            f"#{anime['country']}\n"
+
+
+        )
+   
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=['start'])
     dp.register_message_handler(help_command, commands=['help'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(send_image, commands=['mem'])
     dp.register_message_handler(get_random_user, commands=['get'])
+    dp.register_message_handler(get_anime, commands=['anime'])
