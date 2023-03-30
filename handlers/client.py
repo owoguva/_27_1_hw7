@@ -52,15 +52,13 @@ async def get_random_user(message: types.Message):
                 f"{random_user[5]}"
     )
 
-async def get_anime(message: types.Message):
-    animes = parser()
-    for anime in animes:
+async def get_news(message: types.Message):
+    newes = parser()
+    for news in newes:
         await message.answer(
-            f"{anime['link']}\n"
-            f"{anime['title']}\n"
-            f"#y{anime['year']}\n"
-            f"#{anime['genre']}\n"
-            f"#{anime['country']}\n"
+            f"{news['link']}\n"
+            f"{news['title']}\n"
+            f"#{news['data']}\n"
 
 
         )
@@ -71,4 +69,4 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(send_image, commands=['mem'])
     dp.register_message_handler(get_random_user, commands=['get'])
-    dp.register_message_handler(get_anime, commands=['anime'])
+    dp.register_message_handler(get_news, commands=['news'])
