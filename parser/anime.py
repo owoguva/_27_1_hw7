@@ -2,7 +2,7 @@ from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://rezka.ag/animation/?utm_source=canva&utm_medium=iframely"
+URL = "https://kaktus.media/?lable=8&date=2022-10-10&order=time&utm_source=canva&utm_medium=iframely"
 
 HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
@@ -18,21 +18,21 @@ def get_html(url):
 def get_data_from_page(html):
     soup = BeautifulSoup(html, 'html.parser')
     items = soup.find_all(
-        'div', class_="b-content__inline_item"
+        'div', class_="ArticleItem--data ArticleItem--data--withImage"
     )
 
-    animes = []
+    newes = []
     for item in items:
-        info = item.find("div", class_="b-content__inline_item-link").find("div").getText().split(", ")
-        anime = {
-            "title": item.find("div", class_="b-content__inline_item-link").find("a").getText(),
-            "link": item.find("div", class_="b-content__inline_item-link").find("a").get("href"),
-            "year": info[0],
-            "country": info[1],
-            "genre": info[2],
+        info = item.find("a", class_="ArticleItem--name").getText().split(", ")
+        news = {
+            "title": item.find("a", class_="ArticleItem--name").getText(),
+            "link": item.find("a", class_="ArticleItem--name").get("href"),
+            "data": info[0],
+
         }
-        animes.append(anime)
-    return animes
+        newes.append(news)
+    return newes
+
 
 def parser():
     html = get_html(URL)
@@ -46,3 +46,4 @@ def parser():
     else:
         raise Exception("Error in parser")
 pprint(parser())
+
